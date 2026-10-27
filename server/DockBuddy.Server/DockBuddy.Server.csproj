@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyName>DockBuddy.Server</AssemblyName>
+    <RootNamespace>DockBuddy.Server</RootNamespace>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- Keep another configuration's generated files out of this build. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**;obj/**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <!-- Normal build: a Windows GUI app (no console window) that lives in the system tray. -->
+  <PropertyGroup Condition="'$(Headless)' != 'true'">
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+    <ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+  </PropertyGroup>
+
+  <!-- Headless build (dotnet build -p:Headless=true): no UI, so it can run on Linux for API testing. -->
+  <PropertyGroup Condition="'$(Headless)' == 'true'">
+    <DefineConstants>$(DefineConstants);HEADLESS</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(Headless)' == 'true'">
+    <Compile Remove="Gui\**" />
+  </ItemGroup>
+
+  <!-- Remote update: carry the current phone app inside the server. A DockBuddy.apk next to the exe overrides it. -->
+  <ItemGroup Condition="Exists('..\..\dist\DockBuddy.apk')">
+    <EmbeddedResource Include="..\..\dist\DockBuddy.apk" LogicalName="DockBuddy.apk" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="8.0.1" />
+  </ItemGroup>
+
+</Project>

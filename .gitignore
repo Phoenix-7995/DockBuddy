@@ -1,0 +1,15 @@
+bin/
+obj/
+server/publish/
+*.apk
+# build outputs and local test captures (publish the exe/apk as release assets instead)
+dist/
+*.tar.gz
+screenshots/
+
+# secrets and local config
+*.jks
+*.keystore
+local.properties
+config.json
+.gradle/

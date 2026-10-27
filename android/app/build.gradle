@@ -1,0 +1,61 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.dockbuddy.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.dockbuddy.app"
+        minSdk 14
+        targetSdk 34
+        versionCode 10
+        versionName "1.9"
+    }
+
+    // Optional: sign with your own key (CI release workflow sets these from repository secrets) so updates keep
+    // installing over older versions. Without them the normal debug key is used.
+    if (System.getenv('DOCKBUDDY_KEYSTORE')) {
+        signingConfigs {
+            debug {
+                storeFile file(System.getenv('DOCKBUDDY_KEYSTORE'))
+                storePassword System.getenv('DOCKBUDDY_KEYSTORE_PASSWORD')
+                keyAlias System.getenv('DOCKBUDDY_KEY_ALIAS')
+                keyPassword System.getenv('DOCKBUDDY_KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        abortOnError true
+    }
+}
+
+// The PC server reads this file out of the APK to tell phones which version it carries (remote update).
+// Raise versionCode with every release you want phones to pick up.
+def versionAssetsDir = layout.buildDirectory.dir('generated/versionAssets')
+tasks.register('writeVersionAsset') {
+    def dir = versionAssetsDir
+    def code = android.defaultConfig.versionCode
+    def name = android.defaultConfig.versionName
+    outputs.dir(dir)
+    doLast {
+        def f = dir.get().file('version.txt').asFile
+        f.parentFile.mkdirs()
+        f.text = "${code}\n${name}\n"
+    }
+}
+android.sourceSets.main.assets.srcDir(versionAssetsDir)
+preBuild.dependsOn 'writeVersionAsset'

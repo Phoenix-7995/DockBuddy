@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DockBuddy</string>
+    <string name="edit_button">Edit button</string>
+    <string name="monitor">PC monitor</string>
+</resources>
