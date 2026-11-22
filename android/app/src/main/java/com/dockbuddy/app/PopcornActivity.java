@@ -42,7 +42,7 @@ public class PopcornActivity extends Activity {
     private IconButton closeButton, backButton, playButton, forwardButton, muteButton;
     private IconButton previousButton, nextButton, fullscreenButton;
     private LineSlider progress, volume;
-    private MascotTile mascot;
+    private CatTile mascot;
 
     @Override protected void onCreate(Bundle b) {
         super.onCreate(b);
@@ -122,7 +122,7 @@ public class PopcornActivity extends Activity {
         tp.weight = 1;
         bar.addView(texts, tp);
 
-        mascot = new MascotTile(this);
+        mascot = new CatTile(this, CatStyle.GINNY);
         bar.addView(mascot, new LinearLayout.LayoutParams(dp(44), dp(44)));
         return bar;
     }

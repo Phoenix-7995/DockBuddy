@@ -39,7 +39,11 @@ public static class WidgetRegistry
         new("mute", "Mute", Col: 0, Row: 2, DefaultColor: "#37474F"),
         new("menu", "Settings", Col: 0, Row: 3, DefaultColor: "#263238"),
         new("stats", "System monitor", Col: 6, Row: 0, H: 2, DefaultColor: "#1B2630", ColorLabel: "Background color"),
-        new("mascot", "Mascot", Col: 6, Row: 2, DefaultColor: "#26A69A"),
+        new("mascot", "Ginny (cat)", Col: 6, Row: 2, DefaultColor: "#26A69A"),
+
+        // Two more cats from the mascot family (phone side: CatWidget.java + CatStyle.java). Start hidden.
+        new("caspar", "Caspar (cat)", Col: 1, Row: 0, DefaultColor: "#37474F", DefaultVisible: false),
+        new("mimi", "Mimi (cat)", Col: 2, Row: 0, DefaultColor: "#5C6BC0", DefaultVisible: false),
         new("page", "Profile (page switch)", Col: 6, Row: 3, DefaultColor: "#37474F"),
 
         // Previous / play-pause / next in one tile (a row when wider than tall, stacked otherwise).

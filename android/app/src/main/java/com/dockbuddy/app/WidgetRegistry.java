@@ -19,7 +19,9 @@ public final class WidgetRegistry {
         register("mute", new Factory() { @Override public DeckWidget create(DeckHost h) { return new MuteWidget(h); } });
         register("menu", new Factory() { @Override public DeckWidget create(DeckHost h) { return new MenuWidget(h); } });
         register("stats", new Factory() { @Override public DeckWidget create(DeckHost h) { return new StatsWidget(h); } });
-        register("mascot", new Factory() { @Override public DeckWidget create(DeckHost h) { return new MascotWidget(h); } });
+        register("mascot", new Factory() { @Override public DeckWidget create(DeckHost h) { return new CatWidget(h, CatStyle.GINNY); } });
+        register("caspar", new Factory() { @Override public DeckWidget create(DeckHost h) { return new CatWidget(h, CatStyle.CASPAR); } });
+        register("mimi", new Factory() { @Override public DeckWidget create(DeckHost h) { return new CatWidget(h, CatStyle.MIMI); } });
         register("page", new Factory() { @Override public DeckWidget create(DeckHost h) { return new PageWidget(h); } });
         register("mic", new Factory() { @Override public DeckWidget create(DeckHost h) { return new MicWidget(h); } });
         register("mixer", new Factory() { @Override public DeckWidget create(DeckHost h) { return new MixerWidget(h); } });
